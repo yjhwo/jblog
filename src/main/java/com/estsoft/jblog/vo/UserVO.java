@@ -20,6 +20,12 @@ public class UserVO {
 		this.reg_date = reg_date;
 	}
 
+	
+	public UserVO(String user_id, String password) {
+		this.user_id = user_id;
+		this.password = password;
+	}
+
 	public String getUser_id() {
 		return user_id;
 	}

@@ -21,4 +21,8 @@ public class UserService {
 		return vo;
 	}
 	
+	public UserVO login(UserVO vo){
+		UserVO authUser = userDao.getUser(vo);
+		return authUser;
+	}
 }

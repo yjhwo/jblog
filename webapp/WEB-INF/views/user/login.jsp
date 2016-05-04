@@ -14,14 +14,12 @@
 	<div class="center-content">
 		<h1 class="logo">JBlog</h1>
 		<ul class="menu">
-			<li><a href="">로그인</a></li>
-			<li><a href="">회원가입</a></li>
-			<li><a href="">로그아웃</a></li>
-			<li><a href="">내블로그</a></li>
+			<c:import url="/WEB-INF/views/include/header.jsp"/>
 		</ul>
-		<form class="login-form">
-      		<label>아이디</label> <input type="text" name="id">
-      		<label>패스워드</label> <input type="text" name="password">
+		
+		<form class="login-form" name="loginform" method="post" action="${pageContext.request.contextPath}/user/login?ret=${ret}">
+      		<label>아이디</label> <input type="text" name="user_id">
+      		<label>패스워드</label> <input type="password" name="password" value="">					
       		<input type="submit" value="로그인">
 		</form>
 	</div>

@@ -17,6 +17,13 @@ public class CategoryVO {
 		this.post_count = post_count;
 	}
 
+	public CategoryVO(Long blog_id, String name, String description, Long post_count) {
+		this.blog_id = blog_id;
+		this.name = name;
+		this.description = description;
+		this.post_count = post_count;
+	}
+
 	public Long getCategory_id() {
 		return category_id;
 	}

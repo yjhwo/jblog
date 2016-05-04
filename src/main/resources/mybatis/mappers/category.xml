@@ -4,10 +4,17 @@
 <mapper namespace="category">
 
 	<!-- 회원가입 시 카테고리 생성 -->
-	<insert id="create" parameterType="long">
+	<insert id="create" parameterType="categoryvo">
 		<![CDATA[
-			INSERT INTO category VALUES(null,#{blog_id},null,null,null)
+			INSERT INTO category VALUES(null,#{blog_id},#{name},#{description},#{post_count})
 		]]>
 	</insert>
+
+	<!-- 카테고리 목록 가져오기 -->
+	<select id="selectList" resultType="categoryvo" parameterType="string">
+		<![CDATA[
+			SELECT category_id,blog_id,name,description,post_count FROM category
+		]]>
+	</select>
 
 </mapper>

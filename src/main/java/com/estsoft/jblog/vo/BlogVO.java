@@ -14,7 +14,7 @@ public class BlogVO {
 		this.title = title;
 		this.logo = logo;
 	}
-
+	
 	public Long getBlog_id() {
 		return blog_id;
 	}

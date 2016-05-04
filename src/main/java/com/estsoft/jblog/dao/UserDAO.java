@@ -20,4 +20,8 @@ public class UserDAO {
 	public UserVO get(String user_id) { 			// 아이디 있는지 확인
 		return sqlSession.selectOne("user.getUserId", user_id);
 	}
+	
+	public UserVO getUser(UserVO vo){
+		return sqlSession.selectOne("user.getUser",vo);
+	}
 }
