@@ -20,8 +20,18 @@ public class CategoryDAO {
 		sqlSession.insert("category.create", vo);
 	}
 
-	public List<CategoryVO> getList(String user_id) {
-		List<CategoryVO> list = sqlSession.selectList("category.selectList", user_id);
+	public int insertCategory(CategoryVO vo){
+		// return : int The number of rows affected by the insert.
+		return sqlSession.insert("category.create",vo);
+	}
+	
+	public int deleteCategory(Long category_id){
+		// return : int The number of rows affected by the delete.
+		return sqlSession.delete("category.delete", category_id);
+	}
+	
+	public List<CategoryVO> getList(Long blog_id) {
+		List<CategoryVO> list = sqlSession.selectList("category.selectList", blog_id);
 		return list;
 	}
 	

@@ -15,6 +15,17 @@ public class BlogVO {
 		this.logo = logo;
 	}
 	
+	public BlogVO(String user_id, String title, String logo) {
+		this.user_id = user_id;
+		this.title = title;
+		this.logo = logo;
+	}
+
+	public BlogVO(String user_id, String title) {
+		this.user_id = user_id;
+		this.title = title;
+	}
+
 	public Long getBlog_id() {
 		return blog_id;
 	}

@@ -12,7 +12,6 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1>Spring 이야기</h1>
 			<ul>
 				<c:import url="/WEB-INF/views/include/blog_header.jsp"/>
 			</ul>
@@ -40,7 +39,14 @@
 
 		<div id="extra">
 			<div class="blog-logo">
-				<img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">
+				<c:choose>			
+					<c:when test='${not empty vo.logo }'><br>
+						<img src="${pageContext.request.contextPath}${vo.logo }" >
+					</c:when>
+					<c:otherwise>
+						<img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 

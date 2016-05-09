@@ -18,7 +18,15 @@ public class CategoryService {
 		categoryDao.create(blog_id);
 	}
 	
-	public List<CategoryVO> getList(String user_id){
-		return categoryDao.getList(user_id);
+	public int insertCategory(CategoryVO vo) {	
+		return categoryDao.insertCategory(vo);
+	}
+	
+	public int deleteCategory(Long category_id){
+		return categoryDao.deleteCategory(category_id);
+	}
+	
+	public List<CategoryVO> getList(Long blog_id){
+		return categoryDao.getList(blog_id);
 	}
 }

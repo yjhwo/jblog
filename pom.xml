@@ -52,7 +52,7 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		
+
 		<!-- spring jdbc (myBatis에서 사용할 class들. template) -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -72,8 +72,8 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.0</version>
 		</dependency>
-		
-		
+
+
 		<!-- Commons DBCP(Database Connection Pool) -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
@@ -129,6 +129,19 @@
 			<artifactId>spring-aspects</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+
+		<!-- common fileupload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
+		</dependency>
+
 
 	</dependencies>
 

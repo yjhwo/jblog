@@ -8,11 +8,111 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
 <Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
+<script type="text/javascript">
+var categoryNo = 1;
+
+var fetchList = function(){
+	$.ajax({
+		url:"${pageContext.request.contextPath}/category/getList",
+		type:"post",
+		dataType:"json",		
+		data:"blog_id=${vo.blog_id}",
+		success:function(response){
+			if(response.result != "success"){
+				return;
+			}
+			
+			//HTML 생성한 후 UL에 append
+			$.each(response.data, function(index, vo){
+				$("#category-list").append(renderHtml(vo));
+			});
+		
+		},
+		error:function(xhr, status, error){	/* xhr: xml http request*/
+			console.error(status+":"+error);
+		}
+	});	
+}
+
+var renderHtml = function(vo){
+	var Html ="<tr id='tr-"+vo.category_id+"'>"+
+				"<th>"+categoryNo +"</th>"+
+			  	"<th>"+vo.name+"</th>"+
+			  	"<th>"+vo.post_count+"</th>"+
+			  	"<th>"+vo.description+"</th>"+
+			  	"<th><img src='${pageContext.request.contextPath}/assets/images/delete.jpg' onclick='clickDel("+vo.category_id+")'></th>"+  
+				"</tr>";
+	categoryNo++;
+	
+	return Html;
+}
+
+var clickDel = function(category_id){
+
+		$.ajax({
+			url:"${pageContext.request.contextPath}/category/del",
+			type:"post",
+			dataType:"json",		
+			data:"category_id="+category_id,
+			success:function(response){
+				if(response.result != "success"){
+					alert("카테고리 삭제에 실패하였습니다.");
+					return;
+				}	
+				
+				categoryNo = 1;						// 변수 다시 초기화
+				$("#tr-"+category_id).empty();		// 값 삭제
+				
+			},
+			error:function(xhr, status, error){	/* xhr: xml http request*/
+				console.error(status+":"+error);
+			}
+		});	
+}
+
+$(function() {
+	$("#btn_addCategory").click(
+					function() {
+						var name = $("#name").val();
+						var desc = $("#desc").val();
+						//alert("${vo.blog_id}");
+						if (name == "" ) {	// desc는 없어도 괜찮음
+							return;
+						}
+						
+						$.ajax({
+							url : "${pageContext.request.contextPath}/category/add", //요청URL
+							type : "post", 
+							dataType : "json", 
+							data : "name="+name+"&desc="+desc+"&blog_id=${vo.blog_id}", 
+							success : function(response) { 							//성공 시 callback
+								if (response.result != "success") {
+									alert("카테고리 추가에 실패하였습니다.");
+									return;
+								}
+								$("#name").val("");
+								$("#desc").val("");
+								
+								$("#category-list").append(renderHtml(response.data));
+							},
+							error : function(jqXHR, status, error) { //실패 시 callback
+								console.error(jqXHR + ":" + status
+										+ ":" + error);
+							}
+						});
+						
+					});
+	// 최초 데이터 가져오기
+	fetchList();
+});
+
+
+</script>
 </head>
 <body>
 	<div id="container">
 		<div id="header">
-			<h1>Spring 이야기</h1>
 			<ul>
 				<c:import url="/WEB-INF/views/include/blog_header.jsp"/>
 			</ul>
@@ -20,54 +120,35 @@
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
-					<li><a href="${pageContext.request.contextPath}/blog_admin">기본설정</a></li>
+					<li><a href="${pageContext.request.contextPath}/${sessionScope.authUser.user_id}/blog_admin">기본설정</a></li>
 					<li class="selected">카테고리</li>
-					<li><a href="${pageContext.request.contextPath}/blog_write">글작성</a></li>
+					<li><a href="${pageContext.request.contextPath}/${sessionScope.authUser.user_id}/blog_write">글작성</a></li>
 				</ul>
-		      	<table class="admin-cat">
-		      		<tr>
-		      			<th>번호</th>
-		      			<th>카테고리명</th>
-		      			<th>포스트 수</th>
-		      			<th>설명</th>
-		      			<th>삭제</th>      			
-		      		</tr>
-					<tr>
-						<td>3</td>
-						<td>미분류</td>
-						<td>10</td>
-						<td>카테고리를 지정하지 않은 경우</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>  
-					<tr>
-						<td>2</td>
-						<td>스프링 스터디</td>
-						<td>20</td>
-						<td>어쩌구 저쩌구</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>스프링 프로젝트</td>
-						<td>15</td>
-						<td>어쩌구 저쩌구</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>					  
+				
+			     <table id="category-list" class="admin-cat">
+			      	<tr>
+			      		<th>번호</th>
+			      		<th>카테고리명</th>
+			      		<th>포스트 수</th>
+			      		<th>설명</th>
+			      		<th>삭제</th>      			
+			      	</tr>
 				</table>
+     		 	
       	
       			<h4 class="n-c">새로운 카테고리 추가</h4>
 		      	<table id="admin-cat-add">
 		      		<tr>
 		      			<td class="t">카테고리명</td>
-		      			<td><input type="text" name="name"></td>
+		      			<td><input type="text" id="name" name="name"></td>
 		      		</tr>
 		      		<tr>
 		      			<td class="t">설명</td>
-		      			<td><input type="text" name="desc"></td>
+		      			<td><input type="text" id="desc" name="desc"></td>
 		      		</tr>
 		      		<tr>
 		      			<td class="s">&nbsp;</td>
-		      			<td><input type="submit" value="카테고리 추가"></td>
+		      			<td><input type="submit" id="btn_addCategory" value="카테고리 추가"></td>
 		      		</tr>      		      		
 		      	</table> 
 			</div>

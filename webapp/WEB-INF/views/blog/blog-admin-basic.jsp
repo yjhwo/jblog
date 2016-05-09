@@ -12,7 +12,6 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1>Spring 이야기</h1>
 			<ul>
 				<c:import url="/WEB-INF/views/include/blog_header.jsp"/>
 			</ul>
@@ -21,10 +20,13 @@
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
 					<li class="selected">기본설정</li>
-					<li><a href="${pageContext.request.contextPath}/blog_category">카테고리</a></li>
-					<li><a href="${pageContext.request.contextPath}/blog_write">글작성</a></li>
+					<li><a href="${pageContext.request.contextPath}/${sessionScope.authUser.user_id}/blog_category">카테고리</a></li>
+					<li><a href="${pageContext.request.contextPath}/${sessionScope.authUser.user_id}/blog_write">글작성</a></li>
 				</ul>
-				<form action="" method="post">
+				<form method="post" action="upload" enctype="multipart/form-data">
+					<c:if test='${not empty vo.user_id }'>
+						<input type="hidden" name="user_id" value="${vo.user_id}"/>
+					</c:if>
 	 		      	<table class="admin-config">
 			      		<tr>
 			      			<td class="t">블로그 제목</td>
@@ -32,11 +34,18 @@
 			      		</tr>
 			      		<tr>
 			      			<td class="t">로고이미지</td>
-			      			<td><img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg"></td>      			
+			      			<c:choose>			
+								<c:when test='${not empty vo.logo }'><br>
+									<td><img src="${pageContext.request.contextPath}${vo.logo }" ></td>
+								</c:when>
+								<c:otherwise>
+									<td><img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg"></td>
+								</c:otherwise>
+							</c:choose>
 			      		</tr>      		
 			      		<tr>
 			      			<td class="t">&nbsp;</td>
-			      			<td><input type="file" name="logo-file"></td>      			
+			      			<td><input type="file" name="file"></td>      			
 			      		</tr>           		
 			      		<tr>
 			      			<td class="t">&nbsp;</td>

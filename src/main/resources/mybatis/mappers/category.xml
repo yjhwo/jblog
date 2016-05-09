@@ -3,17 +3,24 @@
 
 <mapper namespace="category">
 
-	<!-- 회원가입 시 카테고리 생성 -->
+	<!-- 회원가입 시 카테고리 생성, 카테고리 추가 시에도 사용! -->
 	<insert id="create" parameterType="categoryvo">
 		<![CDATA[
 			INSERT INTO category VALUES(null,#{blog_id},#{name},#{description},#{post_count})
 		]]>
 	</insert>
 
-	<!-- 카테고리 목록 가져오기 -->
-	<select id="selectList" resultType="categoryvo" parameterType="string">
+	<!-- 카테고리 삭제 -->
+	<delete id="delete" parameterType="long">
 		<![CDATA[
-			SELECT category_id,blog_id,name,description,post_count FROM category
+			DELETE FROM category WHERE category_id=#{category_id}
+		]]>
+	</delete>
+
+	<!-- 카테고리 목록 가져오기 -->
+	<select id="selectList" resultType="categoryvo" parameterType="long">
+		<![CDATA[
+			SELECT category_id,blog_id,name,description,post_count FROM category WHERE blog_id = #{blog_id}
 		]]>
 	</select>
 

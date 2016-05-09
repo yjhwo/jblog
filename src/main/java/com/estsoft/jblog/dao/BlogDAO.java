@@ -18,13 +18,25 @@ public class BlogDAO {
 		
 		int count = sqlSession.insert("blog.create", vo);
 		
-		System.out.println(count);
-		
 		if(count==0){
 			return 0L;
 		}
-		System.out.println(count+"_ blog_id:"+vo.getBlog_id());
 		
 		return vo.getBlog_id();
+	}
+	
+	public void registLogo(String user_id,String title, String url){
+		BlogVO vo = new BlogVO(user_id, title, url);
+		sqlSession.insert("blog.registLogo", vo);
+	}
+	
+	public void registTitle(String user_id, String title){
+		BlogVO vo = new BlogVO(user_id, title);
+		sqlSession.insert("blog.registTitle", vo);
+	}
+
+	
+	public BlogVO getInfo(String user_id){
+		return sqlSession.selectOne("blog.getInfo", user_id);
 	}
 }
