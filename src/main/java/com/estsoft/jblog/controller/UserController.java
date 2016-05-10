@@ -1,6 +1,7 @@
 package com.estsoft.jblog.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,8 +43,12 @@ public class UserController {
 	public String join(@ModelAttribute @Valid UserVO vo, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			model.addAllAttributes(result.getModel()); // Map return
-
-			return "/user/joinform"; // forwarding
+			
+		    List<ObjectError> list = result.getAllErrors();
+		    for (ObjectError e : list) {
+		         System.out.println(" ObjectError : " + e );
+		    }
+			return "/user/join"; 	
 		}
 
 		userService.join(vo);		
@@ -67,18 +73,20 @@ public class UserController {
 	}
 	
 	// -------------------------- loginform 오버로딩
-	@RequestMapping("/loginform")
-	public String loginform() {
-		return "/user/login";
-	}
+//	@RequestMapping("/loginform")
+//	public String loginform() {
+//		return "/user/login";
+//	}
 	
-	@RequestMapping("/loginform/{ret}")
-	public String loginform(@PathVariable("ret")String ret,Model model) {
+	@RequestMapping("/loginform")
+	public String loginform(@RequestParam(value="ret", required = true, defaultValue="-1") String user_id,Model model) {
 		
 		// 블로그 주소로 접근해서 로그인 한 경우  main으로 리턴하지 않고, 해당 블로그로 리턴하도록 
-		if(ret.equals("ret")){
-			model.addAttribute("ret","1");
-		}
+		
+//		if(ret.equals("ret")){
+//			model.addAttribute("ret","1");
+//		}
+		model.addAttribute("ret", user_id);
 		
 		return "/user/login";
 	}

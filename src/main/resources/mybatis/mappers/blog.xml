@@ -14,14 +14,14 @@
 		</selectKey>
 	</insert>
 
-	<!-- 로고 URL 저장 -->
+	<!-- 로고 URL,타이틀 저장 -->
 	<insert id="registLogo" parameterType="blogvo">
 		<![CDATA[
 			UPDATE blog SET logo = #{logo}, title = #{title} WHERE user_id = #{user_id}
 		]]>
 	</insert>
 	
-	<!-- 로고 URL 저장 -->
+	<!-- 타이틀만 저장 -->
 	<insert id="registTitle" parameterType="blogvo">
 		<![CDATA[
 			UPDATE blog SET title = #{title} WHERE user_id = #{user_id}
@@ -34,5 +34,6 @@
 			SELECT blog_id, user_id, title, logo FROM blog WHERE user_id = #{user_id}
 		]]>
 	</select>
+	
 	
 </mapper>

@@ -26,7 +26,16 @@ public class CategoryService {
 		return categoryDao.deleteCategory(category_id);
 	}
 	
+	public void addCount(Long category_id){
+		categoryDao.addCount(category_id);
+	}
+	
 	public List<CategoryVO> getList(Long blog_id){
 		return categoryDao.getList(blog_id);
 	}
+	
+	public Long getDefaultCategory(Long blog_id){
+		return categoryDao.getDefaultCategory(blog_id);
+	}
+
 }

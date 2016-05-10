@@ -34,9 +34,9 @@ public class BlogDAO {
 		BlogVO vo = new BlogVO(user_id, title);
 		sqlSession.insert("blog.registTitle", vo);
 	}
-
 	
 	public BlogVO getInfo(String user_id){
 		return sqlSession.selectOne("blog.getInfo", user_id);
 	}
+	
 }

@@ -16,31 +16,61 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.estsoft.jblog.service.BlogService;
 import com.estsoft.jblog.service.CategoryService;
+import com.estsoft.jblog.service.PostService;
 import com.estsoft.jblog.vo.BlogVO;
 import com.estsoft.jblog.vo.CategoryVO;
+import com.estsoft.jblog.vo.PostVO;
 
 @Controller	
-public class BlogController {		// /blog/..
+public class BlogController {	
 	
 	@Autowired
 	private BlogService blogService;
 	@Autowired
 	private CategoryService categoryService;
-	
-	private static final Log LOG = LogFactory.getLog( BlogController.class );
+	@Autowired
+	private PostService postService;
+
 	private static final String SAVE_PATH = "/temp";								// 미리 약속을 해둬야함  
 	
 	@RequestMapping("/{user_id}")
-	public String blog(@PathVariable("user_id")String user_id, Model model) {
+	public String blog(@PathVariable("user_id") String user_id,
+						@RequestParam(value = "category_id", required = true, defaultValue = "-1") Long category_id,
+						@RequestParam(value = "post_id", required = true, defaultValue = "-1") Long post_id,
+						Model model) {
 		
 		model.addAttribute("user_id", user_id);
 		
-		// 카테고리 목록 가져와서 model에 저장
+		// --------- 블로그 정보, 카테고리 목록 가져와서 model에 저장
 		BlogVO vo = blogService.getInfo(user_id);
 		model.addAttribute("vo", vo);
-		
 		List<CategoryVO> list = categoryService.getList(vo.getBlog_id());
 		model.addAttribute("list", list);		
+		// ------
+		
+		if(category_id == -1){				// 카테고리 클릭 안 했을 경우: default(미분류)출력, 첫 번째 post출력
+			Long defaultCategoryNo = categoryService.getDefaultCategory(vo.getBlog_id());
+			
+			List<PostVO> postList = postService.getCategory(defaultCategoryNo); // 해당 카테고리번호의 전체 글 목록	
+			model.addAttribute("postList", postList);
+			
+			if(!postList.isEmpty()){			// 글이  있는 경우
+				model.addAttribute("title", postList.get(0).getTitle());
+				model.addAttribute("content", postList.get(0).getContent());
+			}
+		}else{
+			List<PostVO> postList = postService.getCategory(category_id); 		
+			model.addAttribute("postList", postList);
+		}
+		
+		// post click
+		if(post_id == -1){
+			System.out.println("post_id가 -1!!");
+		}else{
+			PostVO postvo = postService.getPost(new PostVO(category_id, post_id));
+			model.addAttribute("title", postvo.getTitle());
+			model.addAttribute("content", postvo.getContent());
+		}
 		
 		return "/blog/blog-main";
 	}
@@ -69,13 +99,15 @@ public class BlogController {		// /blog/..
 	@RequestMapping("/{user_id}/blog_write")
 	public String blog_write(@PathVariable("user_id")String user_id, Model model){		
 		
-		BlogVO vo = blogService.getInfo(user_id);						
+		BlogVO vo = blogService.getInfo(user_id);								// 해당 블로그 정보			
 		model.addAttribute("vo", vo);
 		
+		List<CategoryVO> list = categoryService.getList(vo.getBlog_id());		//카테고리 목록 가져오기
+		model.addAttribute("list", list);	
+
 		return "/blog/blog-admin-write";
 	}
-	
-	
+		
 	
 	// 블로그 관리 - 기본 설정 - 로고이미지
 	@RequestMapping("/{user_id}/upload")
@@ -86,14 +118,11 @@ public class BlogController {		// /blog/..
 	        String fileOriginalName = file.getOriginalFilename();		// 사용자가 업로드한 파일 이름.(ex. 지출.txt)
 	        String extName = fileOriginalName.substring( fileOriginalName.lastIndexOf(".") + 1, fileOriginalName.length() );
 	        String saveFileName = genSaveFileName( extName );			// 저장할 파일 이름(구분이 쉽게 보통 날짜로 많이 함) => 유일해야 함!
-	        Long size = file.getSize();
 	        
 	        writeFile( file, SAVE_PATH, saveFileName );					// file1안에 InputStream이 들어가 있음
-
 	        String url = "/product-images/" + saveFileName;				// ★★★ 저장한 경로를 주지않고 쌩뚱맞은 폴더 이름으로 해놓은 이유는
-	        
-	        blogService.registLogo(user_id,title,url);					// ★ db에 로고, 타이틀 저장!!! ★				
-	        
+	     
+	        blogService.registLogo(user_id,title,url);					// ★ db에 로고, 타이틀 저장!!! ★			    
 		}else{								// Title만 변경
 			blogService.registTitle(user_id, title);
 		}

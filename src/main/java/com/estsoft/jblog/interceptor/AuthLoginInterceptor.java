@@ -17,8 +17,7 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 	UserService userService;
 	
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 	
 		String ret = request.getParameter("ret");			// 1: 해당 블로그로 가도록 처리
 		
@@ -41,9 +40,10 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 		
 		
 		// 블로그 주소 타고 로그인 한 경우엔 해당 블로그로 가게 처리!!!!!
-		if(ret.equals("1")){
-			response.sendRedirect(request.getContextPath()+"/"+authUser.getUser_id());
-		}else{
+		
+		if(!ret.equals("-1")){		// error X
+			response.sendRedirect(request.getContextPath()+"/"+ret);
+		}else{						// error 
 			response.sendRedirect(request.getContextPath()+"/main");
 		}
 		

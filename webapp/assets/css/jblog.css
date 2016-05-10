@@ -14,7 +14,7 @@ a:hover 		{ color:#dc143c; text-decoration:none; font-weight:bold; }
 
 .center-content	{ width:500px; margin:120px auto 50px auto}
 
-.center-content .logo							{ width:250px; height:200px; background:url(/jblog/assets/images/logo_nam.jpg) 0 0 no-repeat; margin:20px auto; text-indent:-100000px; font-size:0 }
+.center-content .logo							{ width:300px; height:250px; background:url(/jblog/assets/images/logo_nam.jpg) 0 0 no-repeat; margin:20px auto; text-indent:-100000px; font-size:0 }
 .center-content .menu							{ text-align:center; height:20px; margin:0 auto }
 .center-content .menu li						{ display:inline; padding-left:20px }
 .center-content .menu li:first-child			{ margin!-left:70px }
@@ -39,7 +39,7 @@ a:hover 		{ color:#dc143c; text-decoration:none; font-weight:bold; }
 .join-form .block-label 						{ display:block }
 .join-form label, .join-form fieldset			{ margin:10px 0 5px 0 }
 
-.join-form input[type="submit"]					{ display:block; width:80px; margin:20px auto }
+.join-form input[type="submit"]					{ display:block; width:100px; height:25px; margin:20px auto }
 
 .welcome-message								{ height: 200px }
 .welcome-message span							{ font-size:1.2em; font-wight:bold; color:#777 }
@@ -49,8 +49,8 @@ a:hover 		{ color:#dc143c; text-decoration:none; font-weight:bold; }
 
 
 div#container				{ width:920px; margin:0 auto }
-div#header					{ height:120px; background: #5394CC;  }
-div#content					{ float:left; width:720px; min-height:220px }
+div#header					{ height:120px; background: #5394CC; }
+div#content					{ float:left; width:720px; min-height:420px; background: #B3E5FC;}
 div#content.full-screen		{ float:none; width:920px;}
 div#navigation				{ float:right; width:200px }
 div#extra					{ float:right; clear:right; width:200px }
@@ -71,14 +71,14 @@ div#container		{ text-align:left }
 
 
 /* content */
-div#content	.blog-content	{ padding:10px }
-.blog-content h4			{ font-size:1.3em; color:#9D96D0 }
-.blog-content p				{ margin-top:10px; line-height:150% }
-div#content .blog-list		{ margin:20px 0 10px 10px }
-.blog-list 					{ width:100% }
-.blog-list li				{ height:20px; clear:both; }
+div#content	.blog-content	{ padding:10px; height:250px; }
+.blog-content h4			{ font-size:1.3em; font-style:italic; color:#9D96D0; background: #FFF9C4;}
+.blog-content p				{ margin-top:10px; height:100px; line-height:150%;}
+div#content .blog-list		{ margin:20px 0 0 0;}
+.blog-list 					{ width:100%; }
+.blog-list li				{ height:20px; clear:both; margin-left:10px; margin-right:10px; background:#FFFDE7;}
 .blog-list li a				{ display:block; float:left }
-.blog-list li span			{ display:block; float:right; margin-right:30px }
+.blog-list li span			{ display:block; float:right; margin-right:30px}
 
 /* admin content */
 div#content .admin-menu					{ height:20px; margin-top:15px; margin-bottom:10px }

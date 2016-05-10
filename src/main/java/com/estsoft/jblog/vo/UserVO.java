@@ -8,6 +8,7 @@ public class UserVO {
 	private String user_id;
 	@NotEmpty
 	private String user_name;
+	@NotEmpty
 	private String password;
 	private String reg_date;
 	

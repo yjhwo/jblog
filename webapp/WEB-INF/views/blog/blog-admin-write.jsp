@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!doctype html>
 <html>
@@ -23,18 +24,33 @@
 					<li><a href="${pageContext.request.contextPath}/${sessionScope.authUser.user_id}/blog_category">카테고리</a></li>
 					<li class="selected">글작성</li>
 				</ul>
-				<form action="" method="post">
+				<form action="write" method="post">
+					<c:if test='${not empty vo.user_id }'>
+						<input type="hidden" name="user_id" value="${vo.user_id}"/>
+					</c:if>
 			      	<table class="admin-cat-write">
 			      		<tr>
 			      			<td class="t">제목</td>
 			      			<td>
-			      				<input type="text" size="60" name="title">
-				      			<select name="category">
-				      				<option>미분류</option>
-				      				<option>자바</option>
+			      				<input type="text" size="60" name="title" value="">
+			      				
+				      			<select name="category_id">
+									<c:forEach items="${list }" var="vo" varStatus ="status">
+										<option value="${vo.category_id }">${vo.name }</option>
+									</c:forEach>
 				      			</select>
 				      		</td>
 			      		</tr>
+			      		<spring:hasBindErrors name="postVO">
+								<c:if test="${errors.hasFieldErrors('title') }">
+									<c:set var="errorName" value="${errors.getFieldError( 'title' ).codes[0] }" />
+									<br>
+									<strong style="color: red"> 
+									<spring:message code="${errorName }" text="${errors.getFieldError( 'title' ).defaultMessage }" />
+									</strong>
+								</c:if>
+						</spring:hasBindErrors>
+			      		
 			      		<tr>
 			      			<td class="t">내용</td>
 			      			<td><textarea name="content"></textarea></td>

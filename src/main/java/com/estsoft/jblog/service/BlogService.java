@@ -27,4 +27,5 @@ public class BlogService {
 	public BlogVO getInfo(String user_id){
 		return blogDao.getInfo(user_id);
 	}
+	
 }

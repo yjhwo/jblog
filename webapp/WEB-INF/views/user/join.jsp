@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!doctype html>
 <html>
@@ -12,7 +12,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$("#join-form").submit(function() {
+		$("#join-form2").submit(function() {
 			// 1. 이름 유효성 체크(validation)
 			if ($("#user_name").val() == "") {
 				alert("이름은 필수 요소입니다.");
@@ -95,16 +95,23 @@
 </head>
 <body>
 	<div class="center-content">
-		<h1 class="logo">JBlog</h1>
+		<h1 class="logo" onClick="location.href='${pageContext.request.contextPath}/main';">JBlog</h1>
 		<ul class="menu">
-			<li><a href="">로그인</a></li>
-			<li><a href="">회원가입</a></li>
-			<li><a href="">로그아웃</a></li>
-			<li><a href="">내블로그</a></li>
+			<li><a href="${pageContext.request.contextPath}/user/loginform">로그인</a></li>
 		</ul>
 		<form class="join-form" id="join-form" method="post" action="${pageContext.request.contextPath}/user/join">
 			<label class="block-label" for="user_name">이름</label>
 			<input id="user_name" name="user_name" type="text" value="">
+			
+			<spring:hasBindErrors name="userVO">
+				<c:if test="${errors.hasFieldErrors('user_name') }">
+					<c:set var="errorName" value="${errors.getFieldError( 'user_name' ).codes[0] }" />
+					<br>
+					<strong style="color: red"> 
+						<spring:message code="${errorName }" text="${errors.getFieldError( 'user_name' ).defaultMessage }" />
+					</strong>
+				</c:if>
+			</spring:hasBindErrors>
 			
 			<label class="block-label" for="user_id">아이디</label>
 			<input id="user_id" name="user_id" type="text"> 
@@ -112,9 +119,29 @@
 			<input id="btn-checkid" type="button" value="id 중복체크">
 			<img id="img-checkid" style="display: none;" src="${pageContext.request.contextPath}/assets/images/check.png">
 
+			<spring:hasBindErrors name="userVO">
+				<c:if test="${errors.hasFieldErrors('user_id') }">
+					<c:set var="errorName" value="${errors.getFieldError( 'user_id' ).codes[0] }" />
+					<br>
+					<strong style="color: red"> 
+						<spring:message code="${errorName }" text="${errors.getFieldError( 'user_id' ).defaultMessage }" />
+					</strong>
+				</c:if>
+			</spring:hasBindErrors>
+			
 			<label class="block-label" for="password">패스워드</label>
 			<input id="password" name="password" type="password" />
-
+			
+			<spring:hasBindErrors name="userVO">
+				<c:if test="${errors.hasFieldErrors('password') }">
+					<c:set var="errorName" value="${errors.getFieldError( 'password' ).codes[0] }" />
+					<br>
+					<strong style="color: red"> 
+						<spring:message code="${errorName }" text="${errors.getFieldError( 'password' ).defaultMessage }" />
+					</strong>
+				</c:if>
+			</spring:hasBindErrors>
+			
 			<fieldset>
 				<legend>약관동의</legend>
 				<input id="agree-prov" type="checkbox" name="agreeProv" value="y">

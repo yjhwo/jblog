@@ -30,9 +30,18 @@ public class CategoryDAO {
 		return sqlSession.delete("category.delete", category_id);
 	}
 	
+	public void addCount(Long blog_id){
+		sqlSession.update("category.addCount", blog_id);
+	}
+	
 	public List<CategoryVO> getList(Long blog_id) {
 		List<CategoryVO> list = sqlSession.selectList("category.selectList", blog_id);
 		return list;
 	}
+	
+	public Long getDefaultCategory(Long blog_id){
+		return sqlSession.selectOne("category.getDefaultCategory", blog_id);
+	}
+	
 	
 }

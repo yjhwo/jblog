@@ -1,8 +1,12 @@
 package com.estsoft.jblog.vo;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class PostVO {
+
 	private Long post_id;
 	private Long category_id;
+	@NotEmpty
 	private String title;
 	private String content;
 	private String reg_date;
@@ -15,6 +19,18 @@ public class PostVO {
 		this.title = title;
 		this.content = content;
 		this.reg_date = reg_date;
+	}
+
+	
+	public PostVO(Long category_id, String title, String content) {
+		this.category_id = category_id;
+		this.title = title;
+		this.content = content;
+	}
+	
+	public PostVO(Long category_id, Long post_id) {
+		this.category_id = category_id;
+		this.post_id = post_id;
 	}
 
 	public Long getPost_id() {
