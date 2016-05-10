@@ -23,4 +23,17 @@
 			WHERE category_id = #{category_id} AND post_id = #{post_id}
 		]]>
 	</select>
+	
+	<delete id="deletePost" parameterType="long">
+		<![CDATA[
+			DELETE FROM post WHERE post_id = #{post_id}
+		]]>
+	</delete>
+	
+	<delete id="deletePostAll" parameterType="long">
+	<![CDATA[
+			DELETE FROM post WHERE category_id = #{category_id}
+		]]>
+	</delete>
+	
 </mapper>

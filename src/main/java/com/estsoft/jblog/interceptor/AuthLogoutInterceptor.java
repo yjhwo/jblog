@@ -11,7 +11,10 @@ public class AuthLogoutInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		
+		
 		String user_id = request.getParameter("user_id");
+		String ret = request.getParameter("ret");
 		HttpSession httpSession = request.getSession();
 
 		if (httpSession != null) {
@@ -23,7 +26,7 @@ public class AuthLogoutInterceptor extends HandlerInterceptorAdapter {
 		if (user_id == null) {
 			response.sendRedirect(request.getContextPath() + "/main");
 		} else {
-			response.sendRedirect(request.getContextPath() + "/" + user_id);
+			response.sendRedirect(request.getContextPath() + "/" + ret);
 		}
 
 		return false;

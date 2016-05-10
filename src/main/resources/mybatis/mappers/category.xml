@@ -8,6 +8,9 @@
 		<![CDATA[
 			INSERT INTO category VALUES(null,#{blog_id},#{name},#{description},#{post_count})
 		]]>
+		<selectKey keyProperty="category_id" resultType="long" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 	</insert>
 
 	<!-- 카테고리 삭제 -->

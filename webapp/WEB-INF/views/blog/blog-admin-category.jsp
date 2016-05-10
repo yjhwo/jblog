@@ -26,6 +26,7 @@ var fetchList = function(){
 			//HTML 생성한 후 UL에 append
 			$.each(response.data, function(index, vo){
 				$("#category-list").append(renderHtml(vo));
+				categoryNo++;
 			});
 		
 		},
@@ -40,10 +41,10 @@ var renderHtml = function(vo){
 				"<th>"+categoryNo +"</th>"+
 			  	"<th>"+vo.name+"</th>"+
 			  	"<th>"+vo.post_count+"</th>"+
-			  	"<th>"+vo.description+"</th>"+
-			  	"<th><img src='${pageContext.request.contextPath}/assets/images/delete.jpg' onclick='clickDel("+vo.category_id+")'></th>"+  
+			  	"<th>"+vo.description+vo.category_id+"</th>"+
+			  	"<th><img src='${pageContext.request.contextPath}/assets/images/delete.jpg' onclick='clickDel("+vo.category_id+")' style='cursor:pointer'></th>"+  
 				"</tr>";
-	categoryNo++;
+	
 	
 	return Html;
 }
@@ -61,7 +62,7 @@ var clickDel = function(category_id){
 					return;
 				}	
 				
-				categoryNo = 1;						// 변수 다시 초기화
+				//categoryNo = 1;					// 변수 다시 초기화
 				$("#tr-"+category_id).empty();		// 값 삭제
 				
 			},
@@ -95,6 +96,7 @@ $(function() {
 								$("#desc").val("");
 								
 								$("#category-list").append(renderHtml(response.data));
+								categoryNo++;
 							},
 							error : function(jqXHR, status, error) { //실패 시 callback
 								console.error(jqXHR + ":" + status

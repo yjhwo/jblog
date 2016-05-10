@@ -72,10 +72,12 @@ div#container		{ text-align:left }
 
 /* content */
 div#content	.blog-content	{ padding:10px; height:250px; }
-.blog-content h4			{ font-size:1.3em; font-style:italic; color:#9D96D0; background: #FFF9C4;}
-.blog-content p				{ margin-top:10px; height:100px; line-height:150%;}
-div#content .blog-list		{ margin:20px 0 0 0;}
-.blog-list 					{ width:100%; }
+.blog-content h4			{ font-size:1.3em; color:#9D96D0; width:700px; background: #FFF9C4;}
+.blog-content h4 a			{ font-size:12px; cursor:pointer; float:right; margin:5px; color:#D50000;}
+.blog-content p				{ margin-top:10px; height:200px; line-height:150%; background:#FFFDE7;}
+
+div#content .blog-list		{ margin:20px 0 0 0; } 
+.blog-list 					{ width:100%;}
 .blog-list li				{ height:20px; clear:both; margin-left:10px; margin-right:10px; background:#FFFDE7;}
 .blog-list li a				{ display:block; float:left }
 .blog-list li span			{ display:block; float:right; margin-right:30px}
@@ -91,7 +93,7 @@ div#content .admin-config,
 div#content .admin-cat-add,
 div#content .admin-cat					{ border:none; width:720px; margin-top:30px }
 
-.admin-config td.t						{ padding:5px 0; width:75px }
+.admin-config td.t						{ padding:5px 0; width:85px }
 .admin-config td.s						{ padding:20px 0 10px 0; }
 .admin-config img						{ width:120px; border:1px solid #bbb }
 
@@ -100,7 +102,7 @@ div#content .admin-cat					{ border:none; width:720px; margin-top:30px }
 
 .n-c									{ margin-top:30px }
 #admin-cat-add							{ margin-top:10px }
-#admin-cat-add td.t						{ padding:5px 0; width:74px }
+#admin-cat-add td.t						{ padding:5px 0; width:85px }
 #admin-cat-add td.s						{ padding:10px 0 }
 
 .admin-cat-write td.t					{ padding:5px 0; width:40px }

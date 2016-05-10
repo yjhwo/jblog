@@ -25,4 +25,12 @@ public class PostService {
 	public PostVO getPost(PostVO vo){
 		return postDao.getPost(vo);
 	}
+	
+	public void deletePost(Long post_id){
+		postDao.deletePost(post_id);
+	}
+	
+	public void deletePostAll(Long category_id){
+		postDao.deletePostAll(category_id);
+	}
 }

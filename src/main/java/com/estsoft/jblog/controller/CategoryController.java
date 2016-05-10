@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.estsoft.jblog.service.CategoryService;
+import com.estsoft.jblog.service.PostService;
 import com.estsoft.jblog.vo.BlogVO;
 import com.estsoft.jblog.vo.CategoryVO;
 
@@ -22,7 +23,9 @@ import com.estsoft.jblog.vo.CategoryVO;
 public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
-
+	@Autowired
+	private PostService postService;
+	
 	@RequestMapping("/getList")
 	@ResponseBody
 	public Map<String, Object> getList(@RequestParam Long blog_id, Model model) {
@@ -42,15 +45,17 @@ public class CategoryController {
 	public Map<String, Object> addCategory(@RequestParam String name, @RequestParam String desc, @RequestParam Long blog_id) {
 
 		CategoryVO vo = new CategoryVO(blog_id, name, desc, 0L);
-		int chk = categoryService.insertCategory(vo);
-
+		Long category_id = categoryService.insertCategory(vo);
+		vo.setCategory_id(category_id);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		if (chk > 0) { // 성공
+		if (category_id != 0) { // 성공
 			map.put("result", "success");
 		} else {
 			map.put("result", "fail");
 		}
+		
 		map.put("data", vo);
 		
 		return map;
@@ -58,9 +63,9 @@ public class CategoryController {
 	
 	@RequestMapping("/del")
 	@ResponseBody
-	public Map<String, Object> delCategory(@RequestParam Long category_id){		
+	public Map<String, Object> delCategory(@RequestParam(value = "category_id", required = true, defaultValue = "") Long category_id){		
 	
-		
+		postService.deletePostAll(category_id);
 		int chk = categoryService.deleteCategory(category_id);
 		
 		Map<String, Object> map = new HashMap<String, Object>();

@@ -24,4 +24,12 @@ public class PostDAO {
 	public PostVO getPost(PostVO vo){
 		return sqlSession.selectOne("post.getPost", vo);
 	}
+	
+	public void deletePost(Long post_id){
+		sqlSession.delete("post.deletePost", post_id);
+	}
+	
+	public void deletePostAll(Long category_id){
+		sqlSession.delete("post.deletePostAll", category_id);
+	}
 }

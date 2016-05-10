@@ -20,9 +20,14 @@ public class CategoryDAO {
 		sqlSession.insert("category.create", vo);
 	}
 
-	public int insertCategory(CategoryVO vo){
-		// return : int The number of rows affected by the insert.
-		return sqlSession.insert("category.create",vo);
+	public Long insertCategory(CategoryVO vo){
+		int count = sqlSession.insert("category.create",vo);
+		
+		if(count==0){
+			return 0L;
+		}
+		
+		return vo.getCategory_id();
 	}
 	
 	public int deleteCategory(Long category_id){

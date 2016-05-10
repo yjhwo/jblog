@@ -19,7 +19,15 @@
 		<div id="wrapper">
 			<div id="content">
 				<div class="blog-content">
-					<h4>${title }</h4>
+					<h4>
+						<c:if test="${not empty title }">
+							${title }
+							<a href="${pageContext.request.contextPath}/${user_id }/deletepost/${post_id}">삭제</a>
+						</c:if>
+						<c:if test="${empty title }">
+						아직 등록된 글이 없습니다.^^
+						</c:if>
+					</h4>
 					<p>${content }</p>
 				</div>
 				<ul class="blog-list">				

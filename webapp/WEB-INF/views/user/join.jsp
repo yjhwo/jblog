@@ -12,7 +12,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$("#join-form2").submit(function() {
+		$("#join-form").submit(function() {
 			// 1. 이름 유효성 체크(validation)
 			if ($("#user_name").val() == "") {
 				alert("이름은 필수 요소입니다.");

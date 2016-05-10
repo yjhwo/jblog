@@ -18,7 +18,7 @@ public class CategoryService {
 		categoryDao.create(blog_id);
 	}
 	
-	public int insertCategory(CategoryVO vo) {	
+	public Long insertCategory(CategoryVO vo) {	
 		return categoryDao.insertCategory(vo);
 	}
 	

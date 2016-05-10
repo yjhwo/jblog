@@ -82,10 +82,6 @@ public class UserController {
 	public String loginform(@RequestParam(value="ret", required = true, defaultValue="-1") String user_id,Model model) {
 		
 		// 블로그 주소로 접근해서 로그인 한 경우  main으로 리턴하지 않고, 해당 블로그로 리턴하도록 
-		
-//		if(ret.equals("ret")){
-//			model.addAttribute("ret","1");
-//		}
 		model.addAttribute("ret", user_id);
 		
 		return "/user/login";
