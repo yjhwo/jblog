@@ -5,9 +5,14 @@
 <!doctype html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JBlog</title>
-<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+	<!--Import Google Icon Font-->
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons"	rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/materialize.min.css" media="screen,projection" />
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>JBlog</title>
+	<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
 <script type="text/javascript">
 var categoryNo = 1;
@@ -113,6 +118,10 @@ $(function() {
 </script>
 </head>
 <body>
+	  <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/materialize.min.js"></script>
+
 	<div id="container">
 		<div id="header">
 			<ul>
@@ -150,7 +159,11 @@ $(function() {
 		      		</tr>
 		      		<tr>
 		      			<td class="s">&nbsp;</td>
-		      			<td><input type="submit" id="btn_addCategory" value="카테고리 추가"></td>
+		      			<td>
+			      			<button class="btn waves-effect waves-light green" type="submit" name="action" id="btn_addCategory">카테고리 추가
+							 	<i class="material-icons right">send</i>
+							</button>
+		      			</td>
 		      		</tr>      		      		
 		      	</table> 
 			</div>

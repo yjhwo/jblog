@@ -6,9 +6,15 @@
 <!doctype html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JBlog</title>
-<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+	<!--Import Google Icon Font-->
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons"	rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/materialize.min.css" media="screen,projection" />
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>JBlog</title>
+	<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+	
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
 <script type="text/javascript">
 	$(function() {
@@ -38,7 +44,7 @@
 			}
 
 			// 4.약관 체크유무(과제) - jQuery checkbox, jQuery is checked
-			if ($("input:checkbox[id='agree-prov']").is(":checked") == false) {
+			if ($("input:checkbox[id='filled-in-box']").is(":checked") == false) {
 				alert("약관 체크를 해주십시오.");
 				return false;
 			}
@@ -94,12 +100,17 @@
 </script>
 </head>
 <body>
+	  <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/materialize.min.js"></script>
+      
 	<div class="center-content">
 		<h1 class="logo" onClick="location.href='${pageContext.request.contextPath}/main';">JBlog</h1>
 		<ul class="menu">
-			<li><a href="${pageContext.request.contextPath}/user/loginform">로그인</a></li>
+			<li><a href="${pageContext.request.contextPath}/user/loginform" class="waves-effect waves-light btn-large green">로그인</a></li>
 		</ul>
 		<form class="join-form" id="join-form" method="post" action="${pageContext.request.contextPath}/user/join">
+		
 			<label class="block-label" for="user_name">이름</label>
 			<input id="user_name" name="user_name" type="text" value="">
 			
@@ -116,7 +127,7 @@
 			<label class="block-label" for="user_id">아이디</label>
 			<input id="user_id" name="user_id" type="text"> 
 			
-			<input id="btn-checkid" type="button" value="id 중복체크">
+			<input id="btn-checkid" type="button" value="id 중복체크" class="waves-effect waves-light btn green">
 			<img id="img-checkid" style="display: none;" src="${pageContext.request.contextPath}/assets/images/check.png">
 
 			<spring:hasBindErrors name="userVO">
@@ -144,11 +155,14 @@
 			
 			<fieldset>
 				<legend>약관동의</legend>
-				<input id="agree-prov" type="checkbox" name="agreeProv" value="y">
-				<label class="l-float">서비스 약관에 동의합니다.</label>
-			</fieldset>
+				<input type="checkbox" class="filled-in" id="filled-in-box" />
+      			<label for="filled-in-box">서비스 약관에 동의합니다.</label>
+      		</fieldset>
 
-			<input type="submit" value="가입하기">
+	<!-- 		<input type="submit" value="가입하기"> -->
+			<button class="btn waves-effect waves-light  green" type="submit" name="action">가입하기
+			   <i class="material-icons right">send</i>
+			</button>
 
 		</form>
 	</div>

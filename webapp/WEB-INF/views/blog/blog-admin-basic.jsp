@@ -5,11 +5,20 @@
 <!doctype html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JBlog</title>
-<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+	<!--Import Google Icon Font-->
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons"	rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/materialize.min.css" media="screen,projection" />
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>JBlog</title>
+	<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
 </head>
 <body>
+	  <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/materialize.min.js"></script>
+
 	<div id="container">
 		<div id="header">
 			<ul>
@@ -45,11 +54,16 @@
 			      		</tr>      		
 			      		<tr>
 			      			<td class="t">&nbsp;</td>
-			      			<td><input type="file" name="file"></td>      			
+			      			<td><input type="file" name="file" ></td>      			
 			      		</tr>           		
 			      		<tr>
 			      			<td class="t">&nbsp;</td>
-			      			<td class="s"><input type="submit" value="기본설정 변경"></td>      			
+			      			<td class="s">
+			      				<button class="btn waves-effect waves-light green" type="submit" name="action">기본설정 변경
+								   <i class="material-icons right">send</i>
+								</button>
+			      			</td>
+			      			      			
 			      		</tr>           		
 			      	</table>
 				</form>

@@ -6,11 +6,22 @@
 <!doctype html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JBlog</title>
-<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+	<!--Import Google Icon Font-->
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons"	rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/materialize.min.css" media="screen,projection" />
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>JBlog</title>
+	<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
 </head>
 <body>
+	  <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/materialize.min.js"></script>
+      
+   
+
 	<div id="container">
 		<div id="header">
 			<ul>
@@ -18,7 +29,7 @@
 			</ul>
 		</div>
 		<div id="wrapper">
-			<div id="content" class="full-screen">
+			<div id="content" class="full-screen" >
 				<ul class="admin-menu">
 					<li><a href="${pageContext.request.contextPath}/${sessionScope.authUser.user_id}/blog_admin">기본설정</a></li>
 					<li><a href="${pageContext.request.contextPath}/${sessionScope.authUser.user_id}/blog_category">카테고리</a></li>
@@ -34,11 +45,12 @@
 			      			<td>
 			      				<input type="text" size="60" name="title" value="">
 			      				
-				      			<select name="category_id">
+				      			<select name="category_id" >
 									<c:forEach items="${list }" var="vo" varStatus ="status">
 										<option value="${vo.category_id }">${vo.name }</option>
 									</c:forEach>
 				      			</select>
+				      			
 				      		</td>
 			      		</tr>
 			      		<spring:hasBindErrors name="postVO">
@@ -57,7 +69,11 @@
 			      		</tr>
 			      		<tr>
 			      			<td>&nbsp;</td>
-			      			<td class="s"><input type="submit" value="포스트하기"></td>
+			      			<td class="s">
+				      			<button class="btn waves-effect waves-light green" type="submit" name="action">포스트하기
+								 	<i class="material-icons right">send</i>
+								</button>
+			      			</td>
 			      		</tr>
 			      	</table>
 				</form>
@@ -69,5 +85,12 @@
 			</p>
 		</div>
 	</div>
+	  <script type="text/javascript">
+      
+      $(document).ready(function() {
+        $('select').material_select();
+      });
+            
+      </script>
 </body>
 </html>

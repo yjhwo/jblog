@@ -27,8 +27,7 @@
 		</ul>
 		<form class="search-form">
 			<fieldset>
-				<input type="text" name="keyword" /> <input type="submit"
-					value="검색" />
+				<input type="text" name="keyword" /> <input type="submit" name="search" value="검색" class="waves-effect waves-light btn-large green" />
 			</fieldset>
 			<fieldset>
 				<input type="radio" name="which" value="blog-title"> <label>블로그

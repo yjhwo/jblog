@@ -15,15 +15,15 @@
 
 <c:choose>
 	<c:when test='${empty authUser }'>
-		<li><a href="${pageContext.request.contextPath}/user/loginform?ret=${user_id}">로그인</a></li>
+		<li><a href="${pageContext.request.contextPath}/user/loginform?ret=${user_id} " class="waves-effect waves-light btn green">로그인</a></li>
 		<!-- 블로그주소 페이지에서 로그인 한 경우 main으로 안가고 다시 해당 블로그로 가게 return... -->
 	</c:when>
 	
 	
 	<c:otherwise>
 		<c:if test="${authUser.user_id == vo.user_id}">
-			<li><a href="${pageContext.request.contextPath}/${sessionScope.authUser.user_id}/blog_admin">블로그 관리</a></li>	
+			<li><a href="${pageContext.request.contextPath}/${sessionScope.authUser.user_id}/blog_admin" class="waves-effect waves-light btn green">블로그 관리</a></li>	
 		</c:if>
-		<li><a href="${pageContext.request.contextPath}/user/logout?user_id=${sessionScope.authUser.user_id}&ret=${vo.user_id}">로그아웃</a></li>
+		<li><a href="${pageContext.request.contextPath}/user/logout?user_id=${sessionScope.authUser.user_id}&ret=${vo.user_id}" class="waves-effect waves-light btn green">로그아웃</a></li>
 	</c:otherwise>
 </c:choose>

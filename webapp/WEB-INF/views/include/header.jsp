@@ -6,11 +6,11 @@
 
 <c:choose>
 	<c:when test='${empty authUser }'>
-		<li><a href="${pageContext.request.contextPath}/user/loginform">로그인</a></li>
-		<li><a href="${pageContext.request.contextPath}/user/joinform">회원가입</a></li>
+		<li><a href="${pageContext.request.contextPath}/user/loginform" class="waves-effect waves-light btn-large green">로그인</a></li>
+		<li><a href="${pageContext.request.contextPath}/user/joinform" class="waves-effect waves-light btn-large green">회원가입</a></li>
 	</c:when>
 	<c:otherwise>
-		<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
-		<li><a href="${pageContext.request.contextPath}/${sessionScope.authUser.user_id}">내블로그</a></li>
+		<li><a href="${pageContext.request.contextPath}/user/logout" class="waves-effect waves-light btn-large green">로그아웃</a></li>
+		<li><a href="${pageContext.request.contextPath}/${sessionScope.authUser.user_id}" class="waves-effect waves-light btn-large green">내블로그</a></li>
 	</c:otherwise>
 </c:choose>

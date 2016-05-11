@@ -5,11 +5,20 @@
 <!doctype html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JBlog</title>
-<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+	<!--Import Google Icon Font-->
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons"	rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/materialize.min.css" media="screen,projection" />
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>JBlog</title>
+	<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
 </head>
 <body>
+  	<!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/materialize.min.js"></script>
+	
 	<div id="container">
 		<div id="header">
 			<ul>
@@ -22,7 +31,10 @@
 					<h4>
 						<c:if test="${not empty title }">
 							${title }
-							<a href="${pageContext.request.contextPath}/${user_id }/deletepost/${post_id}">삭제</a>
+							<c:if test="${authUser.user_id == vo.user_id}">
+								<a href="${pageContext.request.contextPath}/${user_id }/deletepost/${post_id}">삭제</a>
+							</c:if>
+							
 						</c:if>
 						<c:if test="${empty title }">
 						아직 등록된 글이 없습니다.^^
